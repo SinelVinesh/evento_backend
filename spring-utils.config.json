@@ -1,0 +1,28 @@
+{
+  "baseFolder": "./",
+  "url": "jdbc:postgresql://localhost:5432/evento",
+  "username": "evento",
+  "password": "evento",
+  "driverClass": "org.postgresql.Driver",
+  "basePackage": "mg.sinel.evento",
+  "controllerPackage": "controllers",
+  "modelPackage": "models",
+  "servicePackage": "services",
+  "repositoryPackage": "repositories",
+  "registry": {
+    "app_user": {
+      "model": "mg.sinel.evento.models.AppUser",
+      "repo": "mg.sinel.evento.repositories.AppUserRepo",
+      "service": "mg.sinel.evento.services.AppUserService",
+      "controller": "mg.sinel.evento.controllers.AppUserController",
+      "url": "users"
+    },
+    "user_type": {
+      "model": "mg.sinel.evento.models.UserType",
+      "repo": null,
+      "service": null,
+      "controller": null,
+      "url": null
+    }
+  }
+}
