@@ -1,6 +1,7 @@
 package mg.sinel.evento.controllers;
 
 import custom.springutils.controller.CrudController;
+import custom.springutils.exception.CustomException;
 import mg.sinel.evento.http.requests.AuthRequest;
 import mg.sinel.evento.http.responses.AuthResponse;
 import mg.sinel.evento.models.user.User;
@@ -34,7 +35,7 @@ public class UserController extends CrudController<User, UserService, UserFilter
         try {
             return userAuthService.authenticate(request);
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new CustomException("Veuillez vérifier vos identifiants");
         }
     }
 }
