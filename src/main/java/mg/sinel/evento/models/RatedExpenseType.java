@@ -2,15 +2,11 @@ package mg.sinel.evento.models;
 
 import custom.springutils.model.HasId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-import java.lang.String;
-import java.lang.Integer;
 
 
 @Getter
@@ -19,6 +15,9 @@ import java.lang.Integer;
 @Table(name = "rated_expense_type")
 public class RatedExpenseType extends HasId {
 
-	private String name;
+    private String name;
+    @ManyToOne()
+    @JoinColumn(name = "rate_type_id")
+    private RateType rateType;
 
 }
