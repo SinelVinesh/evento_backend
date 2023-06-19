@@ -20,10 +20,10 @@ public class EventExpense extends HasId {
 
     private BigDecimal amount;
     @ManyToOne()
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "expense_type_id")
-    private ExpenseType expenseType;
+    private ExpenseType variableExpense;
     @ManyToOne()
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "event_id")
     private Event event;
 
