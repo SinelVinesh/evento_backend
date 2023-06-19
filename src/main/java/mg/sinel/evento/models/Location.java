@@ -8,8 +8,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-
 
 @Getter
 @Setter
@@ -18,7 +16,6 @@ import java.math.BigDecimal;
 public class Location extends HasId {
 
     private Integer maxCapacity;
-    private BigDecimal rentPrice;
     private String name;
     @ManyToOne
     @JoinColumn(name = "location_type")
