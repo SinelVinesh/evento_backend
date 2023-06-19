@@ -1,7 +1,8 @@
 package mg.sinel.evento.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import mg.sinel.evento.models.EventExpense;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EventExpenseRepo extends JpaRepository<EventExpense, Long> {
+    public void deleteByEventId(Long eventId);
 }
