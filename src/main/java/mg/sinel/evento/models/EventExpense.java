@@ -26,5 +26,6 @@ public class EventExpense extends HasId {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "event_id")
     private Event event;
+    private Integer quantity;
 
 }

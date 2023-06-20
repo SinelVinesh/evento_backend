@@ -24,5 +24,6 @@ public class EventRatedExpense extends HasId {
     @ManyToOne()
     @JoinColumn(name = "rated_expense_id")
     private RatedExpense ratedExpense;
+    private Integer quantity;
 
 }
