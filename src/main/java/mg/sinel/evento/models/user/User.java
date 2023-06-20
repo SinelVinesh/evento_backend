@@ -25,6 +25,7 @@ public class User extends HasId implements UserDetails {
     private String password;
 
     private String username;
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "user_type_id")

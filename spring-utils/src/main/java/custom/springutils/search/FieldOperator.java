@@ -19,15 +19,13 @@ public class FieldOperator {
             for (int j = 2; j < keys.length; j++) {
                 field.append("_").append(keys[j]);
             }
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             operator = SearchOperator.eq;
             field = new StringBuilder(key);
         }
         if (operator == SearchOperator.isnull && !((Boolean) val)) {
             operator = SearchOperator.isnotnull;
-        }
-        else if (operator == SearchOperator.isnotnull && !((Boolean) val)) {
+        } else if (operator == SearchOperator.isnotnull && !((Boolean) val)) {
             operator = SearchOperator.isnull;
         }
         return new FieldOperator(field.toString(), operator);

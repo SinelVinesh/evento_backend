@@ -26,4 +26,10 @@ public class UserService extends CrudService<User, UserRepo> {
         obj.setPassword(passwordEncoder.encode(obj.getPassword()));
         return super.create(obj);
     }
+
+    @Override
+    public User update(User obj) throws Exception {
+        obj.setPassword(passwordEncoder.encode(obj.getPassword()));
+        return super.update(obj);
+    }
 }
