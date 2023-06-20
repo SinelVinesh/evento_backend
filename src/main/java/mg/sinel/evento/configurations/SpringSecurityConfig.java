@@ -49,7 +49,7 @@ public class SpringSecurityConfig {
         security.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/user/authenticate").permitAll()
-                .requestMatchers("/uploads/**").permitAll()
+                .requestMatchers("/files/**").permitAll()
                 .anyRequest().hasAnyAuthority("ADMIN", "USER")
                 .and()
                 .exceptionHandling()
