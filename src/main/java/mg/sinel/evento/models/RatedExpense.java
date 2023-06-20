@@ -16,11 +16,12 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "rated_expense")
 public class RatedExpense extends HasId {
-    
+
     private BigDecimal rentPrice;
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "rated_expense_type_id")
     private RatedExpenseType ratedExpenseType;
+    private String imageLink;
 }

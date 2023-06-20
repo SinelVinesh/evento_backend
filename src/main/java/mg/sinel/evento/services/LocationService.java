@@ -1,25 +1,32 @@
 package mg.sinel.evento.services;
 
-import mg.sinel.evento.repositories.LocationRepo;
 import custom.springutils.service.CrudService;
 import jakarta.persistence.EntityManager;
-import org.springframework.stereotype.Service;
-import java.lang.Integer;
-import java.math.BigDecimal;
-import java.lang.String;
 import mg.sinel.evento.models.Location;
+import mg.sinel.evento.models.LocationSeatCategory;
+import mg.sinel.evento.repositories.LocationRepo;
+import org.springframework.stereotype.Service;
 
 
 @Service
 public class LocationService extends CrudService<Location, LocationRepo> {
+    private final StorageService storageService;
 
-    public LocationService(LocationRepo repo, EntityManager manager) {
+    public LocationService(LocationRepo repo, EntityManager manager, StorageService storageService) {
         super(repo, manager);
+        this.storageService = storageService;
+    }
+
+    @Override
+    public Location create(Location obj) throws Exception {
+        for (LocationSeatCategory locationSeatCategory : obj.getLocationSeatCategories()) {
+            locationSeatCategory.setLocation(obj);
+        }
+        return super.create(obj);
     }
 
     @Override
     public Class<Location> getEntityClass() {
         return Location.class;
     }
-
 }

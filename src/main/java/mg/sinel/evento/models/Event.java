@@ -37,4 +37,7 @@ public class Event extends HasId {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventRatedExpense> ratedExpenses;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventSeatCategory> eventSeatCategories;
 }

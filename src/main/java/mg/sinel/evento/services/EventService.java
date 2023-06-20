@@ -3,13 +3,11 @@ package mg.sinel.evento.services;
 import custom.springutils.service.CrudService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import mg.sinel.evento.models.Event;
-import mg.sinel.evento.models.EventExpense;
-import mg.sinel.evento.models.EventRatedExpense;
-import mg.sinel.evento.models.EventStatus;
+import mg.sinel.evento.models.*;
 import mg.sinel.evento.repositories.EventExpenseRepo;
 import mg.sinel.evento.repositories.EventRatedExpenseRepo;
 import mg.sinel.evento.repositories.EventRepo;
+import mg.sinel.evento.repositories.EventSeatCategoryRepo;
 import org.springframework.stereotype.Service;
 
 
@@ -18,11 +16,13 @@ import org.springframework.stereotype.Service;
 public class EventService extends CrudService<Event, EventRepo> {
     private final EventRatedExpenseRepo eventRatedExpenseRepo;
     private final EventExpenseRepo eventExpenseRepo;
+    private final EventSeatCategoryRepo eventSeatCategoryRepo;
 
-    public EventService(EventRepo repo, EntityManager manager, EventRatedExpenseRepo eventRatedExpenseRepo, EventExpenseRepo eventExpenseRepo) {
+    public EventService(EventRepo repo, EntityManager manager, EventRatedExpenseRepo eventRatedExpenseRepo, EventExpenseRepo eventExpenseRepo, EventSeatCategoryRepo eventSeatCategoryRepo) {
         super(repo, manager);
         this.eventRatedExpenseRepo = eventRatedExpenseRepo;
         this.eventExpenseRepo = eventExpenseRepo;
+        this.eventSeatCategoryRepo = eventSeatCategoryRepo;
     }
 
     @Override
@@ -44,6 +44,10 @@ public class EventService extends CrudService<Event, EventRepo> {
             expense.setId(null);
             expense.setEvent(obj);
         }
+        for (EventSeatCategory eventSeatCategory : obj.getEventSeatCategories()) {
+            eventSeatCategory.setId(null);
+            eventSeatCategory.setEvent(obj);
+        }
         return super.create(obj);
     }
 
@@ -52,6 +56,7 @@ public class EventService extends CrudService<Event, EventRepo> {
     public Event update(Event obj) throws Exception {
         eventExpenseRepo.deleteByEventId(obj.getId());
         eventRatedExpenseRepo.deleteByEventId(obj.getId());
+        eventSeatCategoryRepo.deleteByEventId(obj.getId());
         for (EventExpense expense : obj.getVariableExpenses()) {
             expense.setId(null);
             expense.setEvent(obj);
@@ -59,6 +64,10 @@ public class EventService extends CrudService<Event, EventRepo> {
         for (EventRatedExpense expense : obj.getRatedExpenses()) {
             expense.setId(null);
             expense.setEvent(obj);
+        }
+        for (EventSeatCategory eventSeatCategory : obj.getEventSeatCategories()) {
+            eventSeatCategory.setId(null);
+            eventSeatCategory.setEvent(obj);
         }
         return super.update(obj);
     }
