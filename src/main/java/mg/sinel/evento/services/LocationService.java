@@ -26,6 +26,14 @@ public class LocationService extends CrudService<Location, LocationRepo> {
     }
 
     @Override
+    public Location update(Location obj) throws Exception {
+        for (LocationSeatCategory locationSeatCategory : obj.getLocationSeatCategories()) {
+            locationSeatCategory.setLocation(obj);
+        }
+        return super.update(obj);
+    }
+
+    @Override
     public Class<Location> getEntityClass() {
         return Location.class;
     }
