@@ -40,4 +40,6 @@ public class Event extends HasId {
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventSeatCategory> eventSeatCategories;
+
+    private BigDecimal taxe;
 }

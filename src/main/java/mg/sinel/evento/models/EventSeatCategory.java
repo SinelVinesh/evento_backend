@@ -27,4 +27,5 @@ public class EventSeatCategory extends HasId {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Event event;
 
+    private Integer sales;
 }

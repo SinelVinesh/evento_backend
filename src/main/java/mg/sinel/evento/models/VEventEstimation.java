@@ -24,5 +24,7 @@ public class VEventEstimation extends HasId {
     private Event event;
 
     private BigDecimal totalExpense;
-    private BigDecimal totalIncome;
+    private BigDecimal estimateIncome;
+    private BigDecimal realIncome;
+    private BigDecimal realIncomeWithTaxe;
 }

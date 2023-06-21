@@ -1,5 +1,6 @@
 package mg.sinel.evento.services;
 
+import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudService;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -68,6 +69,17 @@ public class EventService extends CrudService<Event, EventRepo> {
         for (EventSeatCategory eventSeatCategory : obj.getEventSeatCategories()) {
             eventSeatCategory.setId(null);
             eventSeatCategory.setEvent(obj);
+            if (eventSeatCategory.getSales() != null) {
+                // Verifier que le nombre de places vendues est inferieur au nombre de places disponibles
+                if (eventSeatCategory.getSales() > eventSeatCategory.getLocationSeatCategory().getCapacity()) {
+                    throw new CustomException("Le nombre de places vendues ne peut pas etre superieur au nombre de places disponibles");
+                }
+                if (obj.getEventStatus().getId() != 3) {
+                    EventStatus status = new EventStatus();
+                    status.setId(3L);
+                    obj.setEventStatus(status);
+                }
+            }
         }
         return super.update(obj);
     }
